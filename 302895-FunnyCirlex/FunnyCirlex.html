@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Session7</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="600" style="border: 1px solid #dd33dd;"></canvas>
+<script>
+
+    function Circle(x, y, radius, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+
+
+    }
+
+    function getRandomHex() {
+        return Math.floor(Math.random() * 255);
+    }
+
+    function getRandomColor() {
+        let red = getRandomHex();
+        let green = getRandomHex();
+        let blue = getRandomHex();
+        return "rgb(" + red + "," + green + "," + blue + ")";
+    }
+
+    function getRandomXY() {
+        return Math.floor(Math.random() * 500);
+    }
+    var dx = 2;
+    var dy = -2;
+    function createCircle() {
+        let ctx = document.getElementById("myCanvas").getContext("2d");
+        let radius = Math.floor(Math.random() * 80);
+        let x = getRandomXY();
+        let y = getRandomXY();
+        let color = getRandomColor();
+        let circle = new Circle(x, y, radius, color);
+        ctx.beginPath();
+        ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+
+    }
+    function moveBall() {
+        multiCreteCircle();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        multiCreteCircle();
+        x += dx;
+        y += dy;
+    }
+
+    function multiCreteCircle() {
+        for (let i = 0; i < 20; i++) {
+            createCircle();
+        }
+    }
+
+    moveBall()
+</script>
+</body>
+</html>
