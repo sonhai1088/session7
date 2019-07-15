@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+function Temperature(c) {
+    this.nhietDo = c;
+    if(this.nhietDo < -273){
+        alert("Bạn nhập chưa đúng nhiệt độ");
+    }
+    this.getF = function () {
+        return this.nhietDo *9/5+32;
+    }
+    this.getK = function () {
+        return this.nhietDo + 273.15;
+    }
+}
+let C = parseInt(prompt("Nhập độ °C: "));
+let temp = new Temperature(C);
+let K = temp.getK();
+let F = temp.getF();
+alert(K + "°K");
+alert(F + "°F");
+
+</script>
+</body>
+</html>
