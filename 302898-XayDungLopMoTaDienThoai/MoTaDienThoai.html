@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="mobile">
+    <span class="name">Nokia</span>
+    <select id="nokiaOnOff">
+        <option id="nokiaOn">On</option>
+        <option id="nokiaOff">Off</option>
+    </select>
+    <br>
+    <span class="name">Battery</span>
+    <textarea class="battery" id="nokia-battery" rows="1" cols="5"></textarea>
+    <br>
+
+    <textarea class="inbox" placeholder="inbox" id="nokia-inbox"></textarea><br>
+    <textarea class="outbox" placeholder="outbox" id="nokia-outbox"></textarea><br>
+    <input type="text" placeholder="Write Message" class="msg" oninput="nokia.setMsg(this.value)"><br>
+    <button class="send" onclick="nokia.sendMsg(iphone);update()">Send</button>
+</div>
+<br>
+<div class="mobile">
+    <span class="name">Iphone</span>
+    <select id="iphoneOnOff">
+        <option id="iphoneOn">On</option>
+        <option id="iphoneOff">Off</option>
+    </select>
+    <br>
+    <span class="name">Battery</span>
+    <textarea class="battery" id="iphone-battery" rows="1" cols="5"></textarea>
+    <br>
+    <textarea class="inbox" placeholder="inbox" id="iphone-inbox"></textarea><br>
+    <textarea class="outbox" placeholder="outbox" id="iphone-outbox"></textarea><br>
+    <input type="text" placeholder="Write Message" class="msg" oninput="iphone.setMsg(this.value)"><br>
+    <button class="send" onclick="iphone.sendMsg(nokia);update()">Send</button>
+</div>
+
+    <script>
+        function mobile(mobileName) {
+            this.name = mobileName;
+            this.battery = [100];
+            this.msg = "";
+            this.outBox = [];
+            this.inBox = [];
+            this.getMsg = function () {
+                return this.msg;
+            };
+            this.setMsg = function (value) {
+                this.msg = value;
+            };
+            this.sendMsg = function (mobile) {
+                this.outBox.push(this.msg);
+                mobile.receiveMsg(this.msg);
+                this.useBatterry(1);
+            };
+            this.receiveMsg = function (msg) {
+                this.inBox.push(msg);
+                alert(this.name + " have new a message");
+            };
+            this.useBatterry = function (value) {
+                if (this.battery > 0) {
+                    this.battery -= value;
+                }
+            };
+            this.chargeBattery = function (value) {
+                if (this.battery < 100) {
+                    this.battery += value;
+                }
+            };
+        }
+
+
+        let nokia = new mobile('mobile');
+        let iphone = new mobile('mobile');
+        let battery = new btr (100);
+
+        function update() {
+            document.getElementById("nokia-inbox").innerHTML = nokia.inBox;
+            document.getElementById("nokia-outbox").innerHTML = nokia.outBox;
+            document.getElementById("iphone-inbox").innerHTML = iphone.inBox;
+            document.getElementById("iphone-outbox").innerHTML = iphone.outBox;
+            document.getElementById("iphone-outbox").innerHTML = iphone.outBox;
+        }
+    </script>
+</body>
+</html>
